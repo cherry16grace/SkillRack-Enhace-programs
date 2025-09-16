@@ -1,0 +1,46 @@
+import java.util.*;
+public class Hello {
+    static int target;
+    static int min=Integer.MAX_VALUE;
+    static int nearest;
+    
+    public static void main(String[] args) {
+		//Your Code Here
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int x=sc.nextInt();
+		target=x;
+		String nw=String.valueOf(n);
+		char[] arr=nw.toCharArray();
+		permute(arr,0,arr.length-1);
+		System.out.print(nearest);
+
+	}
+	public static void permute(char[] arr,int left,int right){
+	    if(left==right){
+	        samediff(arr);
+	    }
+	    else{
+	        for(int i=left;i<=right;i++){
+	            swap(arr,left,i);
+	            permute(arr,left+1,right);
+	            swap(arr,left,i);
+	        }
+	    }
+	}
+	public static void swap(char[] arr,int i,int j){
+	    char temp=arr[i];
+	    arr[i]=arr[j];
+	    arr[j]=temp;
+	}
+	public static void samediff(char[] arr){
+	    int val=Integer.parseInt(new String(arr));
+	    int diff=Math.abs(val-target);
+	    if(diff<min){
+	        min=diff;
+	        nearest=val;
+	    }
+	    
+	    
+	}
+}
