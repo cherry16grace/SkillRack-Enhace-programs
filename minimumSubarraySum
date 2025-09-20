@@ -1,0 +1,31 @@
+import java.util.*;
+public class minimumSubarraySum {
+
+    public static void main(String[] args) {
+		//Your Code Here
+		Scanner sc=new Scanenr(System.in);
+		int R=sc.nextInt();
+		int C=sc.nextInt();
+		int[][] dp=new int[R][C+1];
+		for(int row=0;row<R;row++){
+		    for(int col=1;col<=C;col++){
+		        int val=sc.nextInt();
+		        dp[row][col]=val+dp[row][col-1];
+		    }
+		}
+		int k=sc.nextInt();
+		int min=Integer.MAX_VALUE;
+		for(int row=0;row<=R-k;row++){
+		    for(int col=1;col<=C-k+1;col++){
+		        int sum=0;
+		        for(int srow=row;srow<row+k;srow++){
+		            sum+=dp[srow][col+k-1]-dp[srow][col-1];
+		        }
+		        if(sum<min){
+		            min=sum;
+		        }
+		    }
+		}
+		System.out.print(min);
+	}
+}
